@@ -16,7 +16,7 @@ app = dash.Dash(__name__)
 
 # Insecure deserialization (Bandit will catch this)
 def load_user_data(data):
-    return pickle.loads(data)  # Unsafe deserialization
+    return pickle.loads(data)  # Unsafe deserialization test
 
 # Command injection vulnerability (Bandit will catch this)
 def run_command(cmd):
