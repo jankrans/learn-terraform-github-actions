@@ -7,9 +7,9 @@ import yaml
 import subprocess
 
 # Hardcoded secrets (bad practice - for demonstration)
-API_KEY = "sk_test_51ABC123XYZ"
-DB_PASSWORD = "super_secret_password123"
-AWS_SECRET = "AKIA1234567890ABCDEF"
+API_KEY = "sk_test_51ABC123XYZ-test"
+DB_PASSWORD = "super_secret_password123-test"
+AWS_SECRET = "AKIA1234567890ABCDEF-test"
 
 # Initialize the Dash app
 app = dash.Dash(__name__)
