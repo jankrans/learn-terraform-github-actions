@@ -51,7 +51,7 @@ jobs:
         with:
           directory: ${{ env.CONFIG_DIRECTORY }}
           output_format: cli,sarif
-          output_file: console,reports/results_checkov.sarif
+          output_file: console,results_checkov.sarif
           soft_fail: true
 
       
@@ -59,7 +59,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         if: success() || failure()
         with:
-          sarif_file: reports/results_checkov.sarif
+          sarif_file: results_checkov.sarif
 
       - name: Update PR
         uses: actions/github-script@v6
