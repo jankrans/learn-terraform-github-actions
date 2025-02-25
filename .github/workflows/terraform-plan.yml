@@ -7,7 +7,7 @@ env:
   TF_CLOUD_ORGANIZATION: "jankranzen"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: "learn-terraform-github-actions"
-  CONFIG_DIRECTORY: "./terraform"
+  CONFIG_DIRECTORY: "./"
 
 jobs:
   terraform:
@@ -50,6 +50,7 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           directory: ${{ env.CONFIG_DIRECTORY }}
+          framework: terraform,terraform_plan,github_actions
           output_format: cli,sarif
           output_file: console,results_checkov.sarif
           soft_fail: true
