@@ -18,7 +18,7 @@ jobs:
       # so GitHub can check out this repo using the default github.token
       contents: read
       pull-requests: write
-      security-events: writeµ
+      security-events: write
       actions: read
     steps:
       - name: Checkout
