@@ -6,6 +6,13 @@ on:
   pull_request:
     branches: [ main ]
 
+# Add permissions needed for security scanning and results upload
+permissions:
+  contents: read    # for actions/checkout
+  security-events: write    # for github/codeql-action/upload-sarif
+  pull-requests: write    # for PR scanning
+  actions: read    # for running the workflow
+
 jobs:
   security-scan:
     runs-on: ubuntu-latest
