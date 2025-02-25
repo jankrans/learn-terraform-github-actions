@@ -52,17 +52,17 @@ jobs:
           directory: ${{ env.CONFIG_DIRECTORY }}
           framework: terraform,terraform_plan
           output_format: cli,sarif
-          output_file: console,results_checkov_terraform.sarif
+          output_file_path: console,results_checkov_terraform.sarif
           soft_fail: true
 
       - name: Run Checkov Action - Github
         id: checkov-github
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: ./github
+          directory: ./.github
           framework: github_actions
           output_format: cli,sarif
-          output_file: console,results_checkov_github.sarif
+          output_file_path: console,results_checkov_github.sarif
           soft_fail: true
 
       
