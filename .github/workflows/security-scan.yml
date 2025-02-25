@@ -12,6 +12,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Required for Gitleaks to scan git history
     
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -28,13 +30,12 @@ jobs:
         bandit -r src/ -f sarif -o bandit-results.sarif -ll
       continue-on-error: true  # Allow the workflow to continue even if issues are found
     
-    - name: Check for hardcoded secrets
-      run: |
-        # Using grep to look for potential hardcoded secrets
-        echo "Checking for potential hardcoded secrets..."
-        grep -r -E "(password|secret|key|token|credential)" src/ || true
+    - name: Run Gitleaks
+      uses: gitleaks/gitleaks-action@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: Upload Checkov SARIF file
+    - name: Upload Bandit SARIF file
       uses: github/codeql-action/upload-sarif@v3
       if: success() || failure()
       with:
