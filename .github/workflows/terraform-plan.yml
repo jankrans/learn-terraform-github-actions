@@ -49,7 +49,7 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: ${{ env.CONFIG_DIRECTORY }},./github
+          directory: ${{ env.CONFIG_DIRECTORY }} ./github
           framework: terraform,terraform_plan,github_actions
           output_format: cli,sarif
           output_file: console,results_checkov.sarif
