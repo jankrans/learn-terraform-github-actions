@@ -1,0 +1,27 @@
+name: "XX - Gitleaks Security Scan"
+
+on:
+  pull_request:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  gitleaks:
+    name: "Gitleaks Secret Scan"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      security-events: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Required to scan all commits
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        id: gitleaks
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

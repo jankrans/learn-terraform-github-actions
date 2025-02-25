@@ -1,0 +1,39 @@
+name: "XX - GitHub Actions Security Scan"
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+
+env:
+  WORKSPACE: ".github/workflows"
+
+jobs:
+  security-scan:
+    name: "GitHub Actions Security Scan"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Checkov Action - GitHub Actions
+        id: checkov-github
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: ${{ env.WORKSPACE }}
+          framework: github_actions
+          output_format: cli,sarif
+          output_file_path: console,results_checkov_github.sarif
+          soft_fail: true
+
+      - name: Upload Checkov SARIF file
+        uses: github/codeql-action/upload-sarif@v3
+        if: success() || failure()
+        with:
+          sarif_file: results_checkov_github.sarif
+          category: github 
