@@ -7,7 +7,7 @@ env:
   TF_CLOUD_ORGANIZATION: "jankranzen"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: "learn-terraform-github-actions"
-  CONFIG_DIRECTORY: "./"
+  CONFIG_DIRECTORY: "./terraform"
 
 jobs:
   terraform:
@@ -43,6 +43,23 @@ jobs:
         id: plan-output
         with:
           plan: ${{ fromJSON(steps.plan-run.outputs.payload).data.relationships.plan.data.id }}
+
+      #### CODE SECURITY ####
+      - name: Run Checkov Action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: ${{ env.CONFIG_DIRECTORY }}
+          output_format: cli,sarif
+          output_file: console,reports/results_checkov.sarif
+          soft_fail: true
+
+      
+      - name: Upload Checkov SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+        if: success() || failure()
+        with:
+          sarif_file: results_checkov.sarif
 
       - name: Update PR
         uses: actions/github-script@v6
