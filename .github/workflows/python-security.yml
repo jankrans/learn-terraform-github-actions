@@ -29,8 +29,8 @@ jobs:
 
       - name: Run Bandit
         run: |
-          pip install bandit
-          bandit -r ${{ env.WORKSPACE }} -f sarif -o results_bandit.sarif || true
+          pip install bandit[sarif]
+          bandit -r ${{ env.WORKSPACE }} -f sarif -o results_bandit.sarif
 
       - name: Upload Bandit SARIF file
         uses: github/codeql-action/upload-sarif@v3
