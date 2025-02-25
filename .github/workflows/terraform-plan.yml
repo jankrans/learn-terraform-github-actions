@@ -46,7 +46,7 @@ jobs:
 
       #### CODE SECURITY ####
       - name: Run Checkov Action - Terraform
-        id: checkov
+        id: checkov-terraform
         uses: bridgecrewio/checkov-action@master
         with:
           directory: ${{ env.CONFIG_DIRECTORY }}
@@ -55,8 +55,8 @@ jobs:
           output_file: console,results_checkov_terraform.sarif
           soft_fail: true
 
-      - name: Run Checkov Action - Terraform
-        id: checkov
+      - name: Run Checkov Action - Github
+        id: checkov-github
         uses: bridgecrewio/checkov-action@master
         with:
           directory: ./github
