@@ -1,0 +1,53 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+{
+    "name": "CGK DS Infra DevContainer",
+    "image": "mcr.microsoft.com/devcontainers/base:jammy",
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    "features": {
+      "ghcr.io/devcontainers/features/terraform:1": {},
+      "ghcr.io/devcontainers/features/azure-cli:1": {},
+      "ghcr.io/devcontainers/features/powershell:1": {},
+      "ghcr.io/devcontainers/features/python:1": {},
+      "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
+      "ghcr.io/devcontainers/features/common-utils:2": {},
+      "ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
+        "plugins": "terraform zsh-syntax-highlighting zsh-autosuggestions",
+        "omzPlugins": "https://github.com/zsh-users/zsh-syntax-highlighting.git https://github.com/zsh-users/zsh-autosuggestions "
+      },
+      "ghcr.io/dhoeric/features/trivy:latest": {},
+      "ghcr.io/dhoeric/features/terraform-docs:1": {}
+    },
+    // Configure tool-specific properties.
+    "customizations": {
+      "vscode": {
+        "settings": {
+          "terminal.integrated.shell.linux": "zsh",
+          "terraform.languageServer.enable": true,
+          "azureTerraform.terminal": "integrated",
+          "files.exclude": {
+            "**/.git": false
+          },
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": "hashicorp.terraform"
+        },
+        "extensions": [
+          "hashicorp.terraform",
+          "ms-azuretools.vscode-azureterraform",
+          "ms-vscode.azure-account",
+          "Gruntfuggly.todo-tree",
+          "databricks.databricks",
+          "eamodio.gitlens",
+          "esbenp.prettier-vscode",
+          "ms-azuretools.vscode-bicep",
+          "mikestead.dotenv",
+          "GitHub.copilot",
+          "github.vscode-github-actions"
+        ]
+      }
+    },
+    // Sets environment variables
+    "remoteEnv": {},
+    "runArgs": [],
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "zsh ./.devcontainer/postContainerStart.sh"
+  }

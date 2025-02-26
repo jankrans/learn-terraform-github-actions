@@ -5,7 +5,7 @@ terraform {
       name = "learn-terraform-aws"
     }
   }
-    
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-west-2"
+  region     = "us-west-2"
   access_key = "AKIAIOSFODNN7EXAMPLE"
   secret_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 }

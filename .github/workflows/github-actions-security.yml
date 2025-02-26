@@ -36,4 +36,4 @@ jobs:
         if: success() || failure()
         with:
           sarif_file: results_checkov_github.sarif
-          category: github 
+          category: github
