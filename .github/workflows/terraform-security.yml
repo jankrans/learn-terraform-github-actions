@@ -40,7 +40,7 @@ jobs:
       - name: Run KICS Action
         uses: checkmarx/kics-github-action@v2.1.5
         with:
-          path: 'terraform,src,github/workflows'
+          path: 'terraform,src,.github/workflows'
           output_formats: 'json,sarif'
           platform_type: 'terraform,cicd'
           output_path: results-dir
