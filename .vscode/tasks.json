@@ -1,0 +1,11 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "pre-commit allowComments",
+        "type": "shell",
+        "command": "pre-commit run --all-files -c ./.devcontainer/.pre-commit-config.yaml",
+        "problemMatcher": []
+      }
+    ]
+  }

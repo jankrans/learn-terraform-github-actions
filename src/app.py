@@ -38,11 +38,11 @@ fig = px.bar(df, x='Month', y='Sales', title='Monthly Sales')
 # Define the app layout
 app.layout = html.Div(children=[
     html.H1(children='Dashboard with Secrets'),
-    
+
     html.Div(children='''
         A simple dashboard with some hardcoded secrets (for security scanning demo).
     '''),
-    
+
     dcc.Graph(
         id='example-graph',
         figure=fig
@@ -53,5 +53,5 @@ if __name__ == '__main__':
     # Weak SSL settings (Bandit will catch this)
     import ssl
     ssl._create_default_https_context = ssl._create_unverified_context
-    
-    app.run_server(debug=True) 
+
+    app.run_server(debug=True)
