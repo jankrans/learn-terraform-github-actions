@@ -40,9 +40,9 @@ jobs:
       - name: Run KICS Action
         uses: checkmarx/kics-github-action@v2.1.5
         with:
-          path: 'terraform,src,github/workflows'
+          path: 'terraform'
           output_formats: 'json,sarif'
-          platform_type: 'terraform,cicd'
+          platform_type: 'terraform'
           output_path: results-dir
           ignore_on_exit: results
 
@@ -52,4 +52,18 @@ jobs:
         with:
           sarif_file: results-dir/results.sarif
           category: terraform-kics
+
+      - name: Run Trivy vulnerability scanner in repo mode
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: 'fs'
+          ignore-unfixed: true
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
 
